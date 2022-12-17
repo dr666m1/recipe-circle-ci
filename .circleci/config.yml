@@ -1,12 +1,20 @@
 version: 2.1
 
 jobs:
-  build:
+  job1:
     docker:
       - image: cimg/base:2022.05
-# auth:
-#   username: dr666m1
-#   password: $DOCKERHUB_PASSWORD
     steps:
       - run: echo "Hello CircleCI!"
+  job2:
+    docker:
+      - image: cimg/base:2022.05
+    steps:
+      - run: echo "Bye CircleCI!"
+
+workflows:
+  workflow1:
+    jobs:
+      - job1
+      - job2
 
