@@ -1,7 +1,7 @@
 version: 2.1
 
 jobs:
-  job1:
+  build:
     docker:
       - image: cimg/base:2022.05
 # auth:
