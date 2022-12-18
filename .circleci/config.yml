@@ -1,5 +1,9 @@
 version: 2.1
 
+orbs:
+  # See https://circleci.com/docs/slack-orb-tutorial/
+  slack: circleci/slack@4.9.3
+
 jobs:
   minimumJob:
     docker:
@@ -21,6 +25,10 @@ jobs:
       - image: cimg/base:2022.05
     steps:
       - run: echo 'approved!'
+      # make sure that this is the final step
+      - slack/notify:
+          event: pass
+          template: basic_success_1
 
 workflows:
   workflow1:
@@ -35,4 +43,4 @@ workflows:
       - approvedJob:
           requires:
             - waitJob
-
+          context: slack-secrets
