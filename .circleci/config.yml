@@ -63,6 +63,6 @@ workflows:
             - waitJob
   slackWorkflow:
     jobs:
-      - slackJob
+      - slackJob:
           context: slack-secrets
 
