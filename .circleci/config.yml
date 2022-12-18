@@ -1,22 +1,25 @@
 version: 2.1
 
 jobs:
-  job1:
+  minimumJob:
     docker:
       # auth is not required at this time
       # See https://circleci.com/docs/private-images/ 
       - image: cimg/base:2022.05
     steps:
       - run: echo "Hello CircleCI!"
-  job2:
+  checkoutJob:
     docker:
       - image: cimg/base:2022.05
     steps:
-      - run: echo "Bye CircleCI!"
+      - checkout
+      - run:
+          name: show files
+          command: ls -al
 
 workflows:
   workflow1:
     jobs:
-      - job1
-      - job2
+      - minimumJob
+      - checkoutJob
 
