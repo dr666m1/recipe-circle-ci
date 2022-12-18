@@ -1,14 +1,14 @@
 version: 2.1
 
 orbs:
-  # See https://circleci.com/docs/slack-orb-tutorial/
+  # https://circleci.com/docs/slack-orb-tutorial/
   slack: circleci/slack@4.9.3
 
 jobs:
   minimumJob:
     docker:
       # auth is not required at this time
-      # See https://circleci.com/docs/private-images/ 
+      # https://circleci.com/docs/private-images/ 
       - image: cimg/base:2022.05
     steps:
       - run: echo "Hello CircleCI!"
@@ -50,8 +50,10 @@ workflows:
       - envJob
   holdWorkflow:
     jobs:
+      # you do not have to define the job in jobs section
       - waitJob:
-          # you do not have to define the job in jobs section
+          # you will not be charged for workflows that are in a hold state waiting for manual approval
+          # https://support.circleci.com/hc/en-us/articles/360047352073-Will-I-be-charged-while-my-workflow-is-On-hold-
           type: approval
       - approvedJob:
           requires:
