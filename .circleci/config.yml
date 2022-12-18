@@ -20,6 +20,18 @@ jobs:
       - run:
           name: show files
           command: ls -al
+  envJob:
+    docker:
+      - image: cimg/base:2022.05
+        environment:
+          CONTAINER_ENV: container
+    steps:
+      - run:
+          command: |
+            echo $STEP_ENV
+            echo $CONTAINER_ENV
+          environment:
+            STEP_ENV: step
   approvedJob:
     docker:
       - image: cimg/base:2022.05
@@ -31,11 +43,12 @@ jobs:
           template: basic_success_1
 
 workflows:
-  workflow1:
+  mainWorkflow:
     jobs:
       - minimumJob
       - checkoutJob
-  workflow2:
+      - envJob
+  holdWorkflow:
     jobs:
       - waitJob:
           # you do not have to define the job in jobs section
