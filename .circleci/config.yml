@@ -16,10 +16,23 @@ jobs:
       - run:
           name: show files
           command: ls -al
+  approvedJob:
+    docker:
+      - image: cimg/base:2022.05
+    steps:
+      - run: echo 'approved!'
 
 workflows:
   workflow1:
     jobs:
       - minimumJob
       - checkoutJob
+  workflow2:
+    jobs:
+      - waitJob:
+          # you do not have to define the job in jobs section
+          type: approval
+      - approvedJob:
+          requires:
+            - waitJob
 
