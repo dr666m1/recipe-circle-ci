@@ -5,13 +5,24 @@ orbs:
   slack: circleci/slack@4.9.3
 
 commands:
-  parameterized-cmd:
+  parameterized-cmd: # you cannot use uppercase letter
     parameters:
       str:
-        default: World
         type: string
+        default: World
+      repeat:
+        type: boolean
+        default: false
     steps:
-      - run: echo "Hello << parameters.str >!"
+      - run:
+          name: first echo
+          command: echo "Hello << parameters.str >!"
+      - when:
+          condition: << parameters.repeat >
+          steps:
+            - run:
+                name: second echo
+                command: echo "Hello << parameters.str >!"
 
 jobs:
   minimumJob:
@@ -44,12 +55,11 @@ jobs:
   parameterizedJob:
     docker:
       - image: cimg/base:2022.05
-        environment:
-          CONTAINER_ENV: container
     steps:
       - parameterized-cmd
       - parameterized-cmd:
           str: Alice
+          repeat: true
   approvedJob:
     docker:
       - image: cimg/base:2022.05
