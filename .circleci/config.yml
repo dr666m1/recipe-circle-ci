@@ -16,13 +16,13 @@ commands:
     steps:
       - run:
           name: first echo
-          command: echo "Hello << parameters.str >!"
+          command: echo Hello << parameters.str >.
       - when:
           condition: << parameters.repeat >
           steps:
             - run:
                 name: second echo
-                command: echo "Hello << parameters.str >!"
+                command: echo Hello << parameters.str >.
 
 jobs:
   minimumJob:
