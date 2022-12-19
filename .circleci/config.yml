@@ -76,6 +76,7 @@ workflows:
       - minimumJob
       - checkoutJob
       - envJob
+      - parameterizedJob
   holdWorkflow:
     jobs:
       # you do not have to define the job in jobs section
