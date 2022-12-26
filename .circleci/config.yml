@@ -12,3 +12,4 @@ workflows:
     jobs:
       - bundler/continue:
           filepath: .circleci/main.yml
+          tag: 3.11
