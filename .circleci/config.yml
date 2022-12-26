@@ -11,7 +11,7 @@ orbs:
 
 jobs:
   setup:
-    executor: continuation/default
+    executor: bundler/default
     steps:
       - checkout
       - bundler/bundle:
