@@ -5,21 +5,10 @@ version: 2.1
 setup: true
 
 orbs:
-  # https://circleci.com/docs/slack-orb-tutorial/
-  continuation: circleci/continuation@0.3.1
   bundler: dr666m1/yaml-bundler@0
-
-jobs:
-  setup:
-    executor: bundler/default
-    steps:
-      - checkout
-      - bundler/bundle:
-          filepath: .circleci/main.yml
-      - continuation/continue:
-          configuration_path: .circleci/main.yml
 
 workflows:
   setup:
     jobs:
-      - setup
+      - bundler/continue:
+          filepath: .circleci/main.yml
