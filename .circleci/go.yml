@@ -9,5 +9,6 @@ jobs:
           command: go test
 workflows:
   go-test:
+    when: << pipeline.parameters.run-go-test >>
     jobs:
       - go-test

@@ -14,8 +14,8 @@ jobs:
       - run: cat .circleci/main.yml
       - path-filtering/set-parameters:
           mapping: |
-            go/.* run-go true
-            py/.* run-py true
+            go/.* run-go-test true
+            py/.* run-py-test true
       - continuation/continue:
           configuration_path: .circleci/main.yml
           # default output-path of set-parameter

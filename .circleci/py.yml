@@ -8,5 +8,6 @@ jobs:
           command: python -m unittest ./py/test.py
 workflows:
   py-test:
+    when: << pipeline.parameters.run-py-test >>
     jobs:
       - py-test
