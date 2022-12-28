@@ -1,0 +1,12 @@
+jobs:
+  go-test:
+    workdir: go
+    docker:
+      - image: cimg/go:1.18
+    steps:
+      - run:
+          command: go test
+workflows:
+  go-test:
+    jobs:
+      - go-test

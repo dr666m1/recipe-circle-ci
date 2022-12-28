@@ -1,0 +1,11 @@
+jobs:
+  py-test:
+    docker:
+      - image: cimg/python:3.11
+    steps:
+      - run:
+          command: python -m unittest ./py/test.py
+workflows:
+  py-test:
+    jobs:
+      - py-test

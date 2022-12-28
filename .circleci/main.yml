@@ -1,90 +1,11 @@
 version: 2.1
-
-orbs:
-  # https://circleci.com/docs/slack-orb-tutorial/
-  slack: circleci/slack@4.9.3
-
-commands:
-  parameterized-cmd: # you cannot use uppercase letter
-    parameters:
-      str:
-        type: string
-        default: World
-      repeat:
-        type: boolean
-        default: false
-    steps:
-      - run:
-          name: first echo
-          command: echo Hello << parameters.str >>.
-      - when:
-          condition: << parameters.repeat >>
-          steps:
-            - run:
-                name: second echo
-                command: echo Hello << parameters.str >>.
-
-jobs:
-  minimumJob:
-    docker:
-      # auth is not required at this time
-      # https://circleci.com/docs/private-images/ 
-      - image: cimg/base:2022.05
-    steps:
-      - run: echo "Hello CircleCI!"
-  checkoutJob:
-    docker:
-      - image: cimg/base:2022.05
-    steps:
-      - checkout
-      - run:
-          name: show files
-          command: ls -al
-  envJob:
-    docker:
-      - image: cimg/base:2022.05
-        environment:
-          CONTAINER_ENV: container
-    steps:
-      - run:
-          command: |
-            echo $STEP_ENV
-            echo $CONTAINER_ENV
-          environment:
-            STEP_ENV: step
-  parameterizedJob:
-    docker:
-      - image: cimg/base:2022.05
-    steps:
-      - parameterized-cmd
-      - parameterized-cmd:
-          str: Alice
-          repeat: true
-  approvedJob:
-    docker:
-      - image: cimg/base:2022.05
-    steps:
-      - run: echo 'approved!'
-      # make sure that this is the final step
-      - slack/notify:
-          event: pass
-          template: basic_success_1
-
+jobs: !include
+  - filepath: ./go.yml
+    jsonpath: $.jobs
+  - filepath: ./py.yml
+    jsonpath: $.jobs
 workflows:
-  mainWorkflow:
-    jobs:
-      - minimumJob
-      - checkoutJob
-      - envJob
-      - parameterizedJob
-  holdWorkflow:
-    jobs:
-      # you do not have to define the job in jobs section
-      - waitJob:
-          # you will not be charged for workflows that are in a hold state waiting for manual approval
-          # https://support.circleci.com/hc/en-us/articles/360047352073-Will-I-be-charged-while-my-workflow-is-On-hold-
-          type: approval
-      - approvedJob:
-          requires:
-            - waitJob
-          context: slack-secrets
+  - filepath: ./go.yml
+    jsonpath: $.workflows
+  - filepath: ./py.yml
+    jsonpath: $.workflows
