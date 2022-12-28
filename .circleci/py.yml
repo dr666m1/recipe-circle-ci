@@ -1,3 +1,7 @@
+parameters:
+  run-py-test:
+    type: boolean
+    default: false
 jobs:
   py-test:
     docker:
