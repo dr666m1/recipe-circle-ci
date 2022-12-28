@@ -9,9 +9,9 @@ jobs:
     steps:
       - checkout
       - yaml-bundler/bundle:
-          filepath: sub.yml
+          filepath: .circleci/sub.yml
       - continuation/continue:
-          configuration_path: sub.yml
+          configuration_path: .circleci/sub.yml
 workflows:
   setup:
     jobs:
