@@ -1,9 +1,4 @@
 version: 2.1
-parameters: !include
-  - filepath: ./go.yml
-    jsonpath: $.parameters
-  - filepath: ./py.yml
-    jsonpath: $.parameters
 jobs: !include
   - filepath: ./go.yml
     jsonpath: $.jobs

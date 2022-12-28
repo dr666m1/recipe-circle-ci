@@ -1,7 +1,3 @@
-parameters:
-  run-go-test:
-    type: boolean
-    default: false
 jobs:
   go-test:
     docker:
@@ -13,6 +9,5 @@ jobs:
           command: go test
 workflows:
   go-test:
-    when: << pipeline.parameters.run-go-test >>
     jobs:
       - go-test

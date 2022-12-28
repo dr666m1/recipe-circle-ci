@@ -1,7 +1,3 @@
-parameters:
-  run-py-test:
-    type: boolean
-    default: false
 jobs:
   py-test:
     docker:
@@ -12,6 +8,5 @@ jobs:
           command: python -m unittest ./py/test.py
 workflows:
   py-test:
-    when: << pipeline.parameters.run-py-test >>
     jobs:
       - py-test

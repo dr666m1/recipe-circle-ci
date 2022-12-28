@@ -3,7 +3,6 @@ setup: true
 orbs:
   yaml-bundler: dr666m1/yaml-bundler@0
   continuation: circleci/continuation@0
-  path-filtering: circleci/path-filtering@0
 jobs:
   setup:
     executor: yaml-bundler/default
@@ -11,15 +10,8 @@ jobs:
       - checkout
       - yaml-bundler/bundle:
           filepath: .circleci/main.yml
-      - run: cat .circleci/main.yml
-      - path-filtering/set-parameters:
-          mapping: |
-            go/.* run-go-test true
-            py/.* run-py-test true
       - continuation/continue:
           configuration_path: .circleci/main.yml
-          # default output-path of set-parameter
-          parameters: /tmp/pipeline-parameters.json
 workflows:
   setup:
     jobs:
