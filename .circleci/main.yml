@@ -4,7 +4,7 @@ jobs: !include
     jsonpath: $.jobs
   - filepath: ./py.yml
     jsonpath: $.jobs
-workflows:
+workflows: !include
   - filepath: ./go.yml
     jsonpath: $.workflows
   - filepath: ./py.yml
