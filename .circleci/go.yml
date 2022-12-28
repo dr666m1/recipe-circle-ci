@@ -1,6 +1,6 @@
 jobs:
   go-test:
-    workdir: go
+    working_directory: go
     docker:
       - image: cimg/go:1.18
     steps:
