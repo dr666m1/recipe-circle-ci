@@ -1,0 +1,14 @@
+version: !include
+  filepath: ./constants.yml
+  jsonpath: '$.version'
+executors: !include ./executors.yml
+jobs:
+  build:
+    executor: main-executor
+    steps: !include
+      - filepath: ./jobs1.yml
+      - filepath: ./jobs2.yml
+workflows:
+  main: !inlude
+    - filepath: ./jobs.yml
+    - filepath: ./trigger.yml

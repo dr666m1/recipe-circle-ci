@@ -1,15 +1,19 @@
 version: 2.1
-
 # this allows you to use CircleCI's dynamic configuration feature
 # https://circleci.com/docs/using-dynamic-configuration/
 setup: true
-
 orbs:
-  bundler: dr666m1/yaml-bundler@0
-
+  yaml-bundler: dr666m1/yaml-bundler@0
+jobs:
+  setup:
+    executor: yaml-bundler/default
+    steps:
+      - checkout
+      - yaml-bundler/bundle:
+          filepath: sub.yml
+      - continuation/continue:
+          configuration_path: sub.yml
 workflows:
   setup:
     jobs:
-      - bundler/continue:
-          filepath: .circleci/main.yml
-          tag: "3.11"
+      - setup
