@@ -3,8 +3,8 @@ package main
 import "testing"
 
 func Test_hello(t *testing.T) {
-	result := hello("dr666m1")
-	if result != "hello dr666m1!" {
+	result := hello("world")
+	if result != "hello world!" {
 		t.Error("incorrect result!")
 	}
 }
