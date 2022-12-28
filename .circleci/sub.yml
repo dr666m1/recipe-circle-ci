@@ -6,8 +6,8 @@ jobs:
   main-job:
     executor: my-executor
     steps: !include
-      - filepath: ./jobs1.yml
-      - filepath: ./jobs2.yml
+      - filepath: ./steps1.yml
+      - filepath: ./steps2.yml
   sub-job:
     executor: my-executor
     steps:
