@@ -12,6 +12,6 @@ jobs:
     executor: my-executor
     steps:
       - run: echo 'this is only step of sub-job'
-workflows: !inlude
+workflows: !include
   - filepath: ./main-workflow.yml
   - filepath: ./sub-workflow.yml
