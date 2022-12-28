@@ -3,12 +3,15 @@ version: !include
   jsonpath: '$.version'
 executors: !include ./executors.yml
 jobs:
-  build:
-    executor: main-executor
+  main-job:
+    executor: my-executor
     steps: !include
       - filepath: ./jobs1.yml
       - filepath: ./jobs2.yml
-workflows:
-  main: !inlude
-    - filepath: ./jobs.yml
-    - filepath: ./trigger.yml
+  sub-job:
+    executor: my-executor
+    steps:
+      - run: echo 'this is only step of sub-job'
+workflows: !inlude
+  - filepath: ./main-workflow.yml
+  - filepath: ./sub-workflow.yml
