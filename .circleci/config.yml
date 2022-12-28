@@ -10,6 +10,7 @@ jobs:
       - checkout
       - yaml-bundler/bundle:
           filepath: .circleci/sub.yml
+      - run: cat .circleci/sub.yml
       - continuation/continue:
           configuration_path: .circleci/sub.yml
 workflows:
